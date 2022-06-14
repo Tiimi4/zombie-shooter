@@ -532,6 +532,98 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1719862099, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_Name
+      value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986272994, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: GunSystem
+      value: 
+      objectReference: {fileID: 1702094880}
+    - target: {fileID: 310723643986272994, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: SprintSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Gameplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
+      value: a63f8915-a7ea-4df0-a755-d950c8393dbb
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 1bf4a839-d0dc-4911-9565-65639f0cf72c
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 6095ddc5-c8d8-45b0-a95b-ebfcc078bfc4
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: b448df67-7b92-42a6-bb9c-3eee17d61ee4
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 4749153a-78ba-4ced-83ac-d453bfeaa666
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
+      value: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Gameplay/Jump[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Gameplay/Shoot[/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Gameplay/Sprint[/Keyboard/shift]
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Gameplay/Look[/Mouse/delta]
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8348397873178937620, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -580,8 +672,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 310723643986273001, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+--- !u!1 &1702094878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7935090312251836596, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
+  m_PrefabInstance: {fileID: 1880919775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1702094880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702094878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <damage>k__BackingField: 10
+  <bulletsLeft>k__BackingField: 30
+  <maxBullets>k__BackingField: 30
+  <range>k__BackingField: 1000
+  <rpm>k__BackingField: 60
+  fpsCam: {fileID: 0}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 2147483647
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +773,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 273274327}
     m_Modifications:
+    - target: {fileID: 3507874318819877510, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -702,7 +825,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3507874318819877510, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
+    - {fileID: 455535287035773261, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
 --- !u!1001 &2084445384
 PrefabInstance:
