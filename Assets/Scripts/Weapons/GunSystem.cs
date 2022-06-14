@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,80 +10,121 @@ namespace Weapons
     {
 
         // Gun stats
-        [field: SerializeField] private int damage { get; set; }
-        [field: SerializeField] private int bulletsLeft { get; set; }
-        [field: SerializeField] private int maxBullets { get; set; }
-        [field: SerializeField] private float range { get; set; }
+        [field: SerializeField] private int Damage { get; set; }
+        [field: SerializeField] private int MagazineBulletsLeft { get; set; }
+        [field: SerializeField] private int MaxBullets { get; set; }
+        [field: SerializeField] private float Range { get; set; }
+        [field: SerializeField] private bool isFullAuto { get; set; }
 
-        private float shotCooldown { get; set; }
-        [field: SerializeField] private int rpm { get; set; }
+        private float ShotCooldown { get; set; }
+        [field: SerializeField] private int Rpm { get; set; }
+        public Action OnEmptyClick;
 
-        private bool _isShotOnCooldown => shotCooldown > 0.001;
+        private bool IsShotOnCooldown => ShotCooldown > 0.001; 
+        private bool HasAmmoLeft => MagazineBulletsLeft > 0;
+        private bool _isChambered = false;
+        private bool _isTriggerHeld = false;
+        private bool _isCocked = false;
+        private bool previousTriggerState = false;
+        
+
+        public GameObject sandHitPrefab;
+        public GameObject muzzleFlashPrefab;
 
     
         // Reference
         public Camera fpsCam;
-        public RaycastHit[] RayHits = new RaycastHit[15];
+        private readonly RaycastHit[] _rayHits = new RaycastHit[15];
         public LayerMask whatIsEnemy;
-        private Transform cameraTransform;
+        private Transform _cameraTransform;
+        public Transform muzzlePosition;
 
 
         private void Awake()
         {
             fpsCam = Camera.main;
-            cameraTransform = fpsCam.transform;
+            if (fpsCam != null) _cameraTransform = fpsCam.transform;
 
+            MagazineBulletsLeft = MaxBullets;
+            CockWeapon();
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
-            if (shotCooldown > 0)
+            if (_isTriggerHeld && isFullAuto)
             {
-                shotCooldown = Mathf.MoveTowards(shotCooldown, 0, Time.fixedDeltaTime);
+                Fire();
             }
+
+            if (!previousTriggerState && _isTriggerHeld && !isFullAuto)
+            {
+                Fire();
+            }
+
+            previousTriggerState = _isTriggerHeld;
+
         }
 
-        public void Shoot()
+        public void PullTrigger(bool isHeld)
         {
-            if (_isShotOnCooldown) return;
-            if (bulletsLeft == 0)
+            _isTriggerHeld = isHeld;
+        }
+
+        public void FillAndCockWeapon()
+        {
+            MagazineBulletsLeft = MaxBullets;
+            CockWeapon();
+        }
+
+        private void Fire()
+        {
+            if (!_isCocked) return;
+            if (!_isChambered)
             {
                 EmptyClick();
-                //return;
+                return;
             }
+          
 
-             int hitCount =  Physics.RaycastNonAlloc(cameraTransform.position, cameraTransform.forward, RayHits, range, whatIsEnemy);
+             int hitCount =  Physics.RaycastNonAlloc(_cameraTransform.position, _cameraTransform.forward, _rayHits, Range, whatIsEnemy);
              if (hitCount > 0)
              {
-                 var firstHit = RayHits.Take(hitCount).OrderBy(hit => hit.distance).First();
-                 Debug.Log($"Distanse: {firstHit.distance} object: {firstHit.collider.gameObject.name} ");
-                 Debug.DrawLine(cameraTransform.position, firstHit.point, Color.magenta, 5f, false);
-             }  
-           
-             
-            
-            bulletsLeft -= 1;
-            shotCooldown = 60f / rpm;
-           
-           
+                 var firstHit = _rayHits.Take(hitCount).OrderBy(hit => hit.distance).First();
+                 Instantiate(sandHitPrefab, firstHit.point,
+                     Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
+             }
+
+
+
+            Instantiate(muzzleFlashPrefab, muzzlePosition);
+            _isChambered = false;
+            _isCocked = false;
+            StartCoroutine(nameof(HandleCocking));
 
         }
 
+        private IEnumerator HandleCocking()
+        {
+            yield return new WaitForSeconds(60f / Rpm);
+            CockWeapon();
+        }
         public void EmptyClick()
         {
+            OnEmptyClick?.Invoke();
+        }
+
+        public void CockWeapon()
+        {
+            _isCocked = true;
+
+            if (HasAmmoLeft)
+            {
+                _isChambered = true;
+                MagazineBulletsLeft--;
+            }
             
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

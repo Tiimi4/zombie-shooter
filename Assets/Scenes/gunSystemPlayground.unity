@@ -193,6 +193,11 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!4 &742080153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 705903629, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
+  m_PrefabInstance: {fileID: 1880919775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,15 +697,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <damage>k__BackingField: 10
-  <bulletsLeft>k__BackingField: 30
-  <maxBullets>k__BackingField: 30
-  <range>k__BackingField: 1000
-  <rpm>k__BackingField: 60
+  <Damage>k__BackingField: 10
+  <BulletsLeft>k__BackingField: 30
+  <MaxBullets>k__BackingField: 30
+  <Range>k__BackingField: 1000
+  <isFullAuto>k__BackingField: 0
+  <Rpm>k__BackingField: 600
+  sandHitPrefab: {fileID: 2977603616636537683, guid: 6f721ab0093233749a0aaf89cd961a3b, type: 3}
+  muzzleFlashPrefab: {fileID: 4755965974992714760, guid: e132f9ef6cd58c347920c0f23e182c08, type: 3}
   fpsCam: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2147483647
+  muzzlePosition: {fileID: 742080153}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0

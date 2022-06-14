@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Weapons;
 
 namespace StarterAssets
@@ -47,6 +48,7 @@ namespace StarterAssets
 		public float BottomClamp = -90.0f;
 
 		public GunSystem GunSystem;
+		private Coroutine ReloadCoroutine;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -75,8 +77,27 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			GunSystem.OnEmptyClick += StartReloadAnimation;
 		}
 
+		private void StartReloadAnimation()
+		{
+			if (ReloadCoroutine == null)
+			{
+				ReloadCoroutine = StartCoroutine(nameof(HandleReloadCoroutine));
+			}
+			
+			
+			Debug.Log("rload anim pls");
+		}
+
+		private IEnumerator HandleReloadCoroutine()
+		{
+			yield return new WaitForSeconds(2f);
+			GunSystem.FillAndCockWeapon();
+			ReloadCoroutine = null;
+		}
 		private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
@@ -97,10 +118,7 @@ namespace StarterAssets
 
 		private void ShootWeapon()
 		{
-			if (_input.shoot)
-			{
-				GunSystem.Shoot();
-			}
+			GunSystem.PullTrigger(_input.shoot);
 		}
 		private void LateUpdate()
 		{
