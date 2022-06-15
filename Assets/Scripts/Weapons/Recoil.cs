@@ -11,20 +11,31 @@ public class Recoil : MonoBehaviour
     [SerializeField] private float recoilY;
     [SerializeField] private float recoilZ;
     
-    [SerializeField, Range(0, 1000)] private float snappinessMultiplier;
+    [SerializeField, Range(0, 20)] private float snappinessMultiplier;
+    [SerializeField, Range(0, 0.999f)] private float snappinessSmoothing;
+
     [SerializeField, Range(0, 1500)] private float returnSpeed;
     
     public Transform RecoilTransform { get; set; }
 
-    
 
+    public AnimationCurve xRecoilMultiplier;
+    
     
     // Update is called once per frame
-    void Update()
+    void Update()   
     {
-        targetRotation = Vector3.MoveTowards(targetRotation, Vector3.zero, Time.deltaTime * returnSpeed);
-        currentRotation = LerpDamp(currentRotation, targetRotation, 0.8f , Time.deltaTime * snappinessMultiplier);
-
+        
+        if (targetRotation.sqrMagnitude < 0.001)
+        {
+            currentRotation = Vector3.MoveTowards(currentRotation, Vector3.zero, Time.deltaTime * returnSpeed);
+        }
+        else
+        {
+            targetRotation = Vector3.MoveTowards(targetRotation, Vector3.zero, Time.deltaTime * returnSpeed);
+        }
+        currentRotation = LerpDamp(currentRotation, targetRotation, snappinessSmoothing , Time.deltaTime * snappinessMultiplier);
+                
 
         // _targetRotation = LerpDamp(_targetRotation, Vector3.zero, 1f - returnSpeedFactor , Time.deltaTime * returnSpeedMultiplier);
         //currentRotation = SlerpDamp(currentRotation, _targetRotation, 1f - snappinessFactor , Time.deltaTime * snappinessMultiplier);
