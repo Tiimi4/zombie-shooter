@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Recoil : MonoBehaviour
 {
-    private Vector3 _currentRotation;
+    public Vector3 currentRotation;
     private Vector3 _targetRotation;
 
     [SerializeField] private float recoilX;
@@ -15,8 +15,7 @@ public class Recoil : MonoBehaviour
     [SerializeField, Range(0, 0.999f)] private float returnSpeedFactor;
     [SerializeField, Range(0, 100)] private float snappinessMultiplier;
     [SerializeField, Range(0, 100)] private float returnSpeedMultiplier;
-
-
+    
     public Transform RecoilTransform { get; set; }
 
     
@@ -25,9 +24,9 @@ public class Recoil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _targetRotation = SlerpDamp(_targetRotation, Vector3.zero, 1f - returnSpeedFactor , Time.deltaTime * returnSpeedMultiplier);
-        _currentRotation = SlerpDamp(_currentRotation, _targetRotation, 1f - snappinessFactor , Time.deltaTime * snappinessMultiplier);
-        RecoilTransform.localRotation = Quaternion.Euler(_currentRotation);
+        _targetRotation = LerpDamp(_targetRotation, Vector3.zero, 1f - returnSpeedFactor , Time.deltaTime * returnSpeedMultiplier);
+        currentRotation = SlerpDamp(currentRotation, _targetRotation, 1f - snappinessFactor , Time.deltaTime * snappinessMultiplier);
+        //RecoilTransform.localRotation = Quaternion.Euler(_currentRotation);
     }
 
     public void RecoilFire()

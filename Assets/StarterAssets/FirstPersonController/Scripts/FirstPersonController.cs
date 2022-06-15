@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Weapons;
 
@@ -125,6 +126,9 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			ShootWeapon();
+			RecoilTransform.rotation =
+				Quaternion.AngleAxis(GunSystem.recoilScript.currentRotation.y, Vector3.up) * RecoilTransform.parent.rotation ;
+			RecoilTransform.Rotate(Vector3.right * GunSystem.recoilScript.currentRotation.x);
 		}
 
 		private void ShootWeapon()
@@ -143,6 +147,14 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
+		bool SameSign(float num1, float num2)
+		{
+			if (num1 > 0 && num2 < 0)
+				return false;
+			if (num1 < 0 && num2 > 0)
+				return false;
+			return true;
+		}
 		private void CameraRotation()
 		{
 			// if there is an input
@@ -151,9 +163,44 @@ namespace StarterAssets
 				//Don't multiply mouse input by Time.deltaTime
 				bool IsCurrentDeviceMouse = true;
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+				float deltaPitch = _input.look.y * RotationSpeed * deltaTimeMultiplier;
+				float deltaYaw =   _input.look.x * RotationSpeed * deltaTimeMultiplier;
+				Vector3 currentRecoil = GunSystem.recoilScript.currentRotation;
+
+				/*
+				if (currentRecoil.x > 180)
+				{
+					currentRecoil.x -= 360;
+				}
 				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+				if (currentRecoil.y > 180)
+				{
+					currentRecoil.y -= 360;
+				}
+				if ( Mathf.Abs(currentRecoil.x) >= 0.001 && Mathf.Abs(deltaPitch) >= 0.001 && !SameSign(currentRecoil.x, deltaPitch))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(currentRecoil.x));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
+					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
+					
+				}
+				
+				
+				if ( Mathf.Abs(currentRecoil.y) >= 0.001 && Mathf.Abs(deltaYaw) >= 0.001 && !SameSign(currentRecoil.y, deltaYaw))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(currentRecoil.y));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
+					
+					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
+					
+					
+				}
+				*/
+				_cinemachineTargetPitch += deltaPitch;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -162,7 +209,8 @@ namespace StarterAssets
 				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
 				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
+				transform.Rotate(Vector3.up * deltaYaw);
+				
 			}
 		}
 
