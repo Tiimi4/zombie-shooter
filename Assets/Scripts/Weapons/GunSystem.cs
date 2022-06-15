@@ -89,6 +89,7 @@ namespace Weapons
              int hitCount =  Physics.RaycastNonAlloc(_cameraTransform.position, _cameraTransform.forward, _rayHits, Range, whatIsEnemy);
              if (hitCount > 0)
              {
+                 // render hit effect
                  var firstHit = _rayHits.Take(hitCount).OrderBy(hit => hit.distance).First();
                  Instantiate(sandHitPrefab, firstHit.point,
                      Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
