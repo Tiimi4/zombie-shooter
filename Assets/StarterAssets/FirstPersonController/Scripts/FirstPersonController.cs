@@ -167,7 +167,7 @@ namespace StarterAssets
 				float deltaYaw =   _input.look.x * RotationSpeed * deltaTimeMultiplier;
 				Vector3 currentRecoil = GunSystem.recoilScript.currentRotation;
 
-				/*
+				
 				if (currentRecoil.x > 180)
 				{
 					currentRecoil.x -= 360;
@@ -199,7 +199,7 @@ namespace StarterAssets
 					
 					
 				}
-				*/
+				
 				_cinemachineTargetPitch += deltaPitch;
 
 				// clamp our pitch rotation

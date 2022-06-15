@@ -532,6 +532,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1702094880, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: <MaxBullets>k__BackingField
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_Enabled
       value: 1
