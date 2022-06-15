@@ -49,6 +49,7 @@ namespace StarterAssets
 
 		public GunSystem GunSystem;
 		private Coroutine ReloadCoroutine;
+		public Transform RecoilTransform;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -77,8 +78,16 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			
+		}
 
+	
+
+		private void AddWeaponCallbacks()
+		{
 			GunSystem.OnEmptyClick += StartReloadAnimation;
+			GunSystem.recoilScript.RecoilTransform = RecoilTransform;
+
 		}
 
 		private void StartReloadAnimation()
@@ -106,6 +115,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			
+			AddWeaponCallbacks();
 		}
 
 		private void Update()

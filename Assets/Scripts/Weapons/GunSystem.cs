@@ -39,7 +39,8 @@ namespace Weapons
         private Transform _cameraTransform;
         public Transform muzzlePosition;
 
-
+        public Recoil recoilScript;
+        
         private void Awake()
         {
             fpsCam = Camera.main;
@@ -47,6 +48,9 @@ namespace Weapons
 
             MagazineBulletsLeft = MaxBullets;
             CockWeapon();
+            recoilScript = GetComponent<Recoil>();
+
+
         }
 
         public void Update()
@@ -97,6 +101,7 @@ namespace Weapons
 
 
 
+             recoilScript.RecoilFire();
             Instantiate(muzzleFlashPrefab, muzzlePosition);
             _isChambered = false;
             _isCocked = false;
