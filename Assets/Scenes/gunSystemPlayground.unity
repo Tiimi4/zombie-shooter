@@ -537,8 +537,28 @@ PrefabInstance:
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: recoilX
+      value: -4.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: returnSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: currentRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: currentRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702094882, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+      propertyPath: snappinessMultiplier
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 739315006979746292, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_Follow

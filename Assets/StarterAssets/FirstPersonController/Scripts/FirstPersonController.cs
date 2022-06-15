@@ -126,9 +126,7 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			ShootWeapon();
-			RecoilTransform.rotation =
-				Quaternion.AngleAxis(GunSystem.recoilScript.currentRotation.y, Vector3.up) * RecoilTransform.parent.rotation ;
-			RecoilTransform.Rotate(Vector3.right * GunSystem.recoilScript.currentRotation.x);
+			GunSystem.recoilScript.ApplyRotationToTransform();
 		}
 
 		private void ShootWeapon()
@@ -165,6 +163,42 @@ namespace StarterAssets
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 				float deltaPitch = _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				float deltaYaw =   _input.look.x * RotationSpeed * deltaTimeMultiplier;
+				Vector3 targetRecoil = GunSystem.recoilScript.targetRotation;
+
+				
+				if (targetRecoil.x > 180)
+				{
+					targetRecoil.x -= 360;
+				}
+				
+				if (targetRecoil.y > 180)
+				{
+					targetRecoil.y -= 360;
+				}
+				if ( Mathf.Abs(targetRecoil.x) >= 0.001 && Mathf.Abs(deltaPitch) >= 0.001 && !SameSign(targetRecoil.x, deltaPitch))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(targetRecoil.x));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
+					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					//deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
+					
+				}
+				
+				
+				if ( Mathf.Abs(targetRecoil.y) >= 0.001 && Mathf.Abs(deltaYaw) >= 0.001 && !SameSign(targetRecoil.y, deltaYaw))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(targetRecoil.y));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
+					
+					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					//deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
+					
+					
+				}
+				
+				
 				Vector3 currentRecoil = GunSystem.recoilScript.currentRotation;
 
 				
