@@ -1,45 +1,46 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		public GameInputActions InputActions;
+		
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-
-		[Header("Movement Settings")]
-		public bool analogMovement;
+		public bool shoot;
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
 
-		public void OnMove(InputValue value)
+		public void Awake()
 		{
-			MoveInput(value.Get<Vector2>());
+			InputActions = new GameInputActions();
+			InputActions.Enable();
+			InputActions.Gameplay.Movement.performed += OnMove;
+			InputActions.Gameplay.Movement.canceled += OnMove;
+			InputActions.Gameplay.Jump.performed += (context =>  JumpInput(context.ReadValueAsButton()));
+			InputActions.Gameplay.Jump.canceled += (context =>  JumpInput(context.ReadValueAsButton()));
+			InputActions.Gameplay.Look.performed += (context =>  LookInput(context.ReadValue<Vector2>()));
+			InputActions.Gameplay.Look.canceled += (context =>  LookInput(context.ReadValue<Vector2>()));
+			InputActions.Gameplay.Sprint.performed += (context =>  SprintInput(context.ReadValueAsButton()));
+			InputActions.Gameplay.Sprint.canceled += (context =>  SprintInput(context.ReadValueAsButton()));
+			InputActions.Gameplay.Shoot.performed += context => shoot = context.ReadValueAsButton();
+			InputActions.Gameplay.Shoot.canceled += context => shoot = context.ReadValueAsButton();
+			
 		}
+		
 
-		public void OnLook(InputValue value)
+		
+		
+		public void OnMove(InputAction.CallbackContext callbackContext)
 		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
+			MoveInput(callbackContext.ReadValue<Vector2>());
 		}
-
-		public void OnJump(InputValue value)
-		{
-			JumpInput(value.isPressed);
-		}
-
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
-		}
-
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{

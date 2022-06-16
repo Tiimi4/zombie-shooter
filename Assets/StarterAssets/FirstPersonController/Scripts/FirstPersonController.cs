@@ -1,14 +1,11 @@
-﻿using UnityEngine;
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-using UnityEngine.InputSystem;
-#endif
+﻿using System;
+using System.Collections;
+using UnityEngine;
+using Weapons;
 
 namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-	[RequireComponent(typeof(PlayerInput))]
-#endif
 	public class FirstPersonController : MonoBehaviour
 	{
 		[Header("Player")]
@@ -51,6 +48,10 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		public GunSystem GunSystem;
+		private Coroutine ReloadCoroutine;
+		public Transform RecoilTransform;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -63,28 +64,13 @@ namespace StarterAssets
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
-
-	
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		private PlayerInput _playerInput;
-#endif
+		
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
-
-		private bool IsCurrentDeviceMouse
-		{
-			get
-			{
-				#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-				return _playerInput.currentControlScheme == "KeyboardMouse";
-				#else
-				return false;
-				#endif
-			}
-		}
+		
 
 		private void Awake()
 		{
@@ -93,21 +79,45 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			
 		}
 
+	
+
+		private void AddWeaponCallbacks()
+		{
+			GunSystem.OnEmptyClick += StartReloadAnimation;
+			GunSystem.recoilScript.RecoilTransform = RecoilTransform;
+
+		}
+
+		private void StartReloadAnimation()
+		{
+			if (ReloadCoroutine == null)
+			{
+				ReloadCoroutine = StartCoroutine(nameof(HandleReloadCoroutine));
+			}
+			
+			
+			Debug.Log("rload anim pls");
+		}
+
+		private IEnumerator HandleReloadCoroutine()
+		{
+			yield return new WaitForSeconds(2f);
+			GunSystem.FillAndCockWeapon();
+			ReloadCoroutine = null;
+		}
 		private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-			_playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
-
+			
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			
+			AddWeaponCallbacks();
 		}
 
 		private void Update()
@@ -115,8 +125,14 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			ShootWeapon();
+			GunSystem.recoilScript.ApplyRotationToTransform();
 		}
 
+		private void ShootWeapon()
+		{
+			GunSystem.PullTrigger(_input.shoot);
+		}
 		private void LateUpdate()
 		{
 			CameraRotation();
@@ -129,16 +145,96 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
+		bool SameSign(float num1, float num2)
+		{
+			if (num1 > 0 && num2 < 0)
+				return false;
+			if (num1 < 0 && num2 > 0)
+				return false;
+			return true;
+		}
 		private void CameraRotation()
 		{
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold)
 			{
 				//Don't multiply mouse input by Time.deltaTime
+				bool IsCurrentDeviceMouse = true;
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+				float deltaPitch = _input.look.y * RotationSpeed * deltaTimeMultiplier;
+				float deltaYaw =   _input.look.x * RotationSpeed * deltaTimeMultiplier;
+				Vector3 targetRecoil = GunSystem.recoilScript.targetRotation;
+
 				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+				if (targetRecoil.x > 180)
+				{
+					targetRecoil.x -= 360;
+				}
+				
+				if (targetRecoil.y > 180)
+				{
+					targetRecoil.y -= 360;
+				}
+				if ( Mathf.Abs(targetRecoil.x) >= 0.001 && Mathf.Abs(deltaPitch) >= 0.001 && !SameSign(targetRecoil.x, deltaPitch))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(targetRecoil.x));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
+					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					//deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
+					
+				}
+				
+				
+				if ( Mathf.Abs(targetRecoil.y) >= 0.001 && Mathf.Abs(deltaYaw) >= 0.001 && !SameSign(targetRecoil.y, deltaYaw))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(targetRecoil.y));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
+					
+					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					//deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
+					
+					
+				}
+				
+				
+				Vector3 currentRecoil = GunSystem.recoilScript.currentRotation;
+
+				
+				if (currentRecoil.x > 180)
+				{
+					currentRecoil.x -= 360;
+				}
+				
+				if (currentRecoil.y > 180)
+				{
+					currentRecoil.y -= 360;
+				}
+				if ( Mathf.Abs(currentRecoil.x) >= 0.001 && Mathf.Abs(deltaPitch) >= 0.001 && !SameSign(currentRecoil.x, deltaPitch))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(currentRecoil.x));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
+					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
+					
+				}
+				
+				
+				if ( Mathf.Abs(currentRecoil.y) >= 0.001 && Mathf.Abs(deltaYaw) >= 0.001 && !SameSign(currentRecoil.y, deltaYaw))
+				{
+					
+					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(currentRecoil.y));
+					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
+					
+					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
+					
+					
+				}
+				
+				_cinemachineTargetPitch += deltaPitch;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -147,7 +243,8 @@ namespace StarterAssets
 				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
 				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
+				transform.Rotate(Vector3.up * deltaYaw);
+				
 			}
 		}
 
@@ -166,7 +263,11 @@ namespace StarterAssets
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
 			float speedOffset = 0.1f;
-			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+			if (_input.move.magnitude > 1f)
+			{
+				_input.move.Normalize();
+			}
+			float inputMagnitude = _input.move.magnitude;
 
 			// accelerate or decelerate to target speed
 			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
