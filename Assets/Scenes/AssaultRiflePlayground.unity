@@ -123,22 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &186350857 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1702094880, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-  m_PrefabInstance: {fileID: 1928355194}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &312713511 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1719862100, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
-  m_PrefabInstance: {fileID: 1050712118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &542508511
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +188,17 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!114 &550144425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2216761515659817931, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
+  m_PrefabInstance: {fileID: 1050712118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,14 +674,14 @@ PrefabInstance:
     - target: {fileID: 310723643986272994, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: GunSystem
       value: 
-      objectReference: {fileID: 186350857}
+      objectReference: {fileID: 550144425}
     - target: {fileID: 739315006979746292, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 924633839}
     - target: {fileID: 739315006979746292, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.572549
+      value: 1.3871635
       objectReference: {fileID: 0}
     - target: {fileID: 739315006979746293, guid: c5ac4609112d1f24f845b56444eca734, type: 3}
       propertyPath: m_LocalPosition.y
@@ -875,91 +870,6 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
---- !u!1001 &1928355194
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 312713511}
-    m_Modifications:
-    - target: {fileID: 1702094880, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: <Rpm>k__BackingField
-      value: 267
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094880, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: <MaxBullets>k__BackingField
-      value: 123423423
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094880, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: <isFullAuto>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094882, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: recoilX
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094882, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: returnSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094882, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: snappinessSmoothing
-      value: 0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 1702094882, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: snappinessMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.018
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.265
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3649325587272260466, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7935090312251836596, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
-      propertyPath: m_Name
-      value: Pistol
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 81b199daa3df5894394cf99a9ea12c04, type: 3}
 --- !u!1001 &2084445384
 PrefabInstance:
   m_ObjectHideFlags: 0

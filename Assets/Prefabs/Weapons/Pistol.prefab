@@ -164,10 +164,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 10
   <MagazineBulletsLeft>k__BackingField: 0
-  <MaxBullets>k__BackingField: 300
+  <MaxBullets>k__BackingField: 324243234
   <Range>k__BackingField: 1000
-  <isFullAuto>k__BackingField: 1
-  <Rpm>k__BackingField: 600
+  <isFullAuto>k__BackingField: 0
+  <Rpm>k__BackingField: 267
   sandHitPrefab: {fileID: 3110127215233957925, guid: 0d8af29aefc44614eaa1e149a49f7c55, type: 3}
   muzzleFlashPrefab: {fileID: 4755965974992714760, guid: e132f9ef6cd58c347920c0f23e182c08, type: 3}
   fpsCam: {fileID: 0}
@@ -190,12 +190,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRotation: {x: 0, y: 0, z: 0}
   targetRotation: {x: 0, y: 0, z: 0}
-  recoilX: -5
+  recoilX: -2
   recoilY: 2
   recoilZ: 0
-  snappinessMultiplier: 18.4
-  snappinessSmoothing: 0.079
-  returnSpeed: 35
+  snappinessMultiplier: 10
+  snappinessSmoothing: 0.07
+  returnSpeed: 5
   xRecoilMultiplier:
     serializedVersion: 2
     m_Curve: []
