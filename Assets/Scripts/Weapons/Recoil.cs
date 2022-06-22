@@ -48,10 +48,11 @@ public class Recoil : MonoBehaviour
         target *= Quaternion.Euler(Vector3.right * currentRotation.x);
         RecoilTransform.rotation = target;
            
-        return;
+     /*
         RecoilTransform.rotation =
             Quaternion.AngleAxis(currentRotation.y, Vector3.up) * RecoilTransform.parent.rotation ;
         RecoilTransform.Rotate(Vector3.right * currentRotation.x);
+        */
     }
 
     public void RecoilFire()
