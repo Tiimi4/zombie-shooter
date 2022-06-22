@@ -30,7 +30,7 @@ namespace Weapons
 
         public GameObject sandHitPrefab;
         public GameObject muzzleFlashPrefab;
-
+        
     
         // Reference
         public Camera fpsCam;
@@ -38,7 +38,7 @@ namespace Weapons
         public LayerMask whatIsEnemy;
         private Transform _cameraTransform;
         public Transform muzzlePosition;
-
+        private AudioSource shotSound;
         public Recoil recoilScript;
         
         private void Awake()
@@ -49,6 +49,7 @@ namespace Weapons
             MagazineBulletsLeft = MaxBullets;
             CockWeapon();
             recoilScript = GetComponent<Recoil>();
+            shotSound = GetComponent<AudioSource>();
 
 
         }
@@ -101,8 +102,16 @@ namespace Weapons
 
 
 
+            // Recoil
              recoilScript.RecoilFire();
+             
+            // Muzzle effect
             Instantiate(muzzleFlashPrefab, muzzlePosition);
+             
+            // Shoot sound effect
+            shotSound.Play();
+             
+            // begin reset shot
             _isChambered = false;
             _isCocked = false;
             StartCoroutine(nameof(HandleCocking));
