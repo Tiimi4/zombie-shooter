@@ -99,11 +99,13 @@ namespace StarterAssets
 			}
 			
 			
+			
 			Debug.Log("rload anim pls");
 		}
 
 		private IEnumerator HandleReloadCoroutine()
 		{
+			GunSystem.StartReload();
 			yield return new WaitForSeconds(2f);
 			GunSystem.FillAndCockWeapon();
 			ReloadCoroutine = null;
@@ -126,12 +128,21 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			ShootWeapon();
+			ManualReload();
 			GunSystem.recoilScript.ApplyRotationToTransform();
 		}
 
 		private void ShootWeapon()
 		{
 			GunSystem.PullTrigger(_input.shoot);
+		}
+
+		private void ManualReload()
+		{
+			if (_input.reload)
+			{
+				StartReloadAnimation();
+			}
 		}
 		private void LateUpdate()
 		{

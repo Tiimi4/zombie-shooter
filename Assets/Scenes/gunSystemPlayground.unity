@@ -761,6 +761,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6204347383688478418, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: <MaxBullets>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
 --- !u!1 &1764214107

@@ -13,6 +13,8 @@ using UnityEngine.InputSystem;
 		public bool jump;
 		public bool sprint;
 		public bool shoot;
+		public bool reload;
+
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -31,6 +33,8 @@ using UnityEngine.InputSystem;
 			InputActions.Gameplay.Sprint.canceled += (context =>  SprintInput(context.ReadValueAsButton()));
 			InputActions.Gameplay.Shoot.performed += context => shoot = context.ReadValueAsButton();
 			InputActions.Gameplay.Shoot.canceled += context => shoot = context.ReadValueAsButton();
+			InputActions.Gameplay.Reload.performed += context => reload = context.ReadValueAsButton();
+			InputActions.Gameplay.Reload.canceled += context => reload = context.ReadValueAsButton();
 			
 		}
 		

@@ -25,6 +25,7 @@ namespace Weapons
         private bool _isChambered = false;
         private bool _isTriggerHeld = false;
         private bool _isCocked = false;
+        private bool _isReloading = false;
         private bool previousTriggerState = false;
         
 
@@ -79,16 +80,24 @@ namespace Weapons
         {
             MagazineBulletsLeft = MaxBullets;
             CockWeapon();
+            _isReloading = false;
+        }
+
+        public void StartReload()
+        {
+            _isReloading = true;
         }
 
         private void Fire()
         {
+            if (_isReloading) return;
             if (!_isCocked) return;
             if (!_isChambered)
             {
                 EmptyClick();
                 return;
             }
+            
           
 
              int hitCount =  Physics.RaycastNonAlloc(_cameraTransform.position, _cameraTransform.forward, _rayHits, Range, whatIsEnemy);
