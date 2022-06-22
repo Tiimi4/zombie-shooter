@@ -48,7 +48,9 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
-		public GunSystem GunSystem;
+		private GunSystem _currentGun;
+		private int _currentGunIndex;
+		public GunSystem[] Guns;
 		private Coroutine ReloadCoroutine;
 		public Transform RecoilTransform;
 
@@ -79,15 +81,18 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
-			
+			// pick first gun of the list
+			_currentGun = Guns[0];
+
 		}
 
 	
 
 		private void AddWeaponCallbacks()
 		{
-			GunSystem.OnEmptyClick += StartReloadAnimation;
-			GunSystem.recoilScript.RecoilTransform = RecoilTransform;
+			_currentGun.gameObject.SetActive(true);
+			_currentGun.OnEmptyClick += StartReloadAnimation;
+			_currentGun.recoilScript.RecoilTransform = RecoilTransform;
 
 		}
 
@@ -105,9 +110,9 @@ namespace StarterAssets
 
 		private IEnumerator HandleReloadCoroutine()
 		{
-			GunSystem.StartReload();
+			_currentGun.StartReload();
 			yield return new WaitForSeconds(2f);
-			GunSystem.FillAndCockWeapon();
+			_currentGun.FillAndCockWeapon();
 			ReloadCoroutine = null;
 		}
 		private void Start()
@@ -129,12 +134,28 @@ namespace StarterAssets
 			Move();
 			ShootWeapon();
 			ManualReload();
-			GunSystem.recoilScript.ApplyRotationToTransform();
+			SelectWeapon();
+			_currentGun.recoilScript.ApplyRotationToTransform();
+		}
+
+		private void SelectWeapon()
+		{
+			if ( _input.selectWeapon > 0)
+			{
+				int index = (int)_input.selectWeapon;
+				if (_currentGunIndex == index) return;
+				if (index  > Guns.Length) return;
+				_currentGun.gameObject.SetActive(false);
+				_currentGunIndex = index;
+				_currentGun = Guns[index - 1];
+				AddWeaponCallbacks();
+			}
+			
 		}
 
 		private void ShootWeapon()
 		{
-			GunSystem.PullTrigger(_input.shoot);
+			_currentGun.PullTrigger(_input.shoot);
 		}
 
 		private void ManualReload()
@@ -174,7 +195,7 @@ namespace StarterAssets
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 				float deltaPitch = _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				float deltaYaw =   _input.look.x * RotationSpeed * deltaTimeMultiplier;
-				Vector3 targetRecoil = GunSystem.recoilScript.targetRotation;
+				Vector3 targetRecoil = _currentGun.recoilScript.targetRotation;
 
 				
 				if (targetRecoil.x > 180)
@@ -191,7 +212,7 @@ namespace StarterAssets
 					
 					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(targetRecoil.x));
 					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
-					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					_currentGun.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
 					//deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
 					
 				}
@@ -203,14 +224,14 @@ namespace StarterAssets
 					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(targetRecoil.y));
 					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
 					
-					GunSystem.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					_currentGun.recoilScript.targetRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
 					//deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
 					
 					
 				}
 				
 				
-				Vector3 currentRecoil = GunSystem.recoilScript.currentRotation;
+				Vector3 currentRecoil = _currentGun.recoilScript.currentRotation;
 
 				
 				if (currentRecoil.x > 180)
@@ -227,7 +248,7 @@ namespace StarterAssets
 					
 					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaPitch), Mathf.Abs(currentRecoil.x));
 					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right, Space.Self);
-					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
+					_currentGun.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaPitch) * Vector3.right;
 					deltaPitch -= recoilRotationAmount * Mathf.Sign(deltaPitch);
 					
 				}
@@ -239,7 +260,7 @@ namespace StarterAssets
 					float recoilRotationAmount = Mathf.Min(Mathf.Abs(deltaYaw), Mathf.Abs(currentRecoil.y));
 					//RecoilTransform.Rotate(recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up, Space.World );
 					
-					GunSystem.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
+					_currentGun.recoilScript.currentRotation += recoilRotationAmount * Mathf.Sign(deltaYaw) * Vector3.up;
 					deltaYaw -= recoilRotationAmount * Mathf.Sign(deltaYaw);
 					
 					

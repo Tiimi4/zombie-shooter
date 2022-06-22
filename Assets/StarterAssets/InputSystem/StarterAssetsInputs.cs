@@ -14,6 +14,7 @@ using UnityEngine.InputSystem;
 		public bool sprint;
 		public bool shoot;
 		public bool reload;
+		public float selectWeapon;
 
 
 		[Header("Mouse Cursor Settings")]
@@ -35,6 +36,8 @@ using UnityEngine.InputSystem;
 			InputActions.Gameplay.Shoot.canceled += context => shoot = context.ReadValueAsButton();
 			InputActions.Gameplay.Reload.performed += context => reload = context.ReadValueAsButton();
 			InputActions.Gameplay.Reload.canceled += context => reload = context.ReadValueAsButton();
+			InputActions.Gameplay.SelectWeapon.performed += context => selectWeapon = context.ReadValue<float>();
+			InputActions.Gameplay.SelectWeapon.canceled += context => selectWeapon = context.ReadValue<float>();
 			
 		}
 		

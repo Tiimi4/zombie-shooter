@@ -561,6 +561,28 @@ LightProbeGroup:
   - {x: 7.1518564, y: 2.7763042, z: -11.2319765}
   - {x: 8.993203, y: 2.3566551, z: -8.796325}
   m_Dering: 1
+--- !u!114 &926002227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5249439907132989557, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+  m_PrefabInstance: {fileID: 1538714449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &984327918 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6204347383688478418, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+  m_PrefabInstance: {fileID: 1538714449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1023754781
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +779,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2794161759121965281, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036737689280175686, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932837822462357852, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: Guns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932837822462357852, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: Guns.Array.data[0]
+      value: 
+      objectReference: {fileID: 984327918}
+    - target: {fileID: 5932837822462357852, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: Guns.Array.data[1]
+      value: 
+      objectReference: {fileID: 926002227}
     - target: {fileID: 6125281210873855374, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
