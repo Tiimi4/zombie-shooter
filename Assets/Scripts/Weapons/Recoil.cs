@@ -35,7 +35,7 @@ public class Recoil : MonoBehaviour
             targetRotation = Vector3.MoveTowards(targetRotation, Vector3.zero, Time.deltaTime * returnSpeed);
         }
         currentRotation = LerpDamp(currentRotation, targetRotation, snappinessSmoothing , Time.deltaTime * snappinessMultiplier);
-                
+               
 
         // _targetRotation = LerpDamp(_targetRotation, Vector3.zero, 1f - returnSpeedFactor , Time.deltaTime * returnSpeedMultiplier);
         //currentRotation = SlerpDamp(currentRotation, _targetRotation, 1f - snappinessFactor , Time.deltaTime * snappinessMultiplier);

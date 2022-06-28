@@ -787,6 +787,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5249439907132989559, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: recoilX
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249439907132989559, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
+      propertyPath: returnSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5932837822462357852, guid: ad6d8333cbea1a646b6e9461347afc8d, type: 3}
       propertyPath: Guns.Array.size
       value: 2
