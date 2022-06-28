@@ -277,8 +277,52 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: InitialModule.startRotationX.scalar
+      value: 3.1415925
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: InitialModule.startRotationY.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974757908466546935, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: InitialModule.randomizeRotationDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008481344268617919, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: m_Flip.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008481344268617919, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: m_Flip.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008481344268617919, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: m_Flip.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008481344268617919, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008481344268617919, guid: ab802a4241d29364db4c3340959f088b, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1092510366908718915, guid: ab802a4241d29364db4c3340959f088b, type: 3}
       propertyPath: m_RootOrder
