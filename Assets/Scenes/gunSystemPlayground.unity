@@ -1132,6 +1132,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 788551168}
     m_Modifications:
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: maxSize
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: maxJumpSize
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: maxMoveSize
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: restingSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889765088923111634, guid: 49ed920959500b64ead947328c0881ca, type: 3}
+      propertyPath: jumpSpeedMultiplier
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5889765088923111637, guid: 49ed920959500b64ead947328c0881ca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
