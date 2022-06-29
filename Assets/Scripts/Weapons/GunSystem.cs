@@ -41,6 +41,7 @@ namespace Weapons
         public Transform muzzlePosition;
         private AudioSource shotSound;
         public Recoil recoilScript;
+        public Crosshair crosshair;
         
         private void Awake()
         {
@@ -113,7 +114,7 @@ namespace Weapons
 
             // Recoil
              recoilScript.RecoilFire();
-             
+             crosshair.bulletWasShot = true;
             // Muzzle effect
             Instantiate(muzzleFlashPrefab, muzzlePosition);
              
