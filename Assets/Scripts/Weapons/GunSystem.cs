@@ -108,6 +108,16 @@ namespace Weapons
                  var firstHit = _rayHits.Take(hitCount).OrderBy(hit => hit.distance).First();
                  Instantiate(sandHitPrefab, firstHit.point,
                      Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
+                 if (firstHit.collider.CompareTag("Enemy"))
+                 {
+                     Debug.Log("Damage enemy here");
+                     EnemyScript enemyRef = firstHit.collider.gameObject.GetComponent<EnemyScript>();
+                     if (enemyRef)
+                     {
+                         enemyRef.HpSystem.Damage(Damage);
+                     }
+                     
+                 }
              }
 
 

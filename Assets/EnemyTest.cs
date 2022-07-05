@@ -1,32 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyTest : MonoBehaviour
 {
-    public GameObject player;
-    NavMeshAgent agent;
-    public HealthSystem HpSystem;
 
+    public HealthSystem HpSystem;
+    
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        HpSystem = new HealthSystem(100);
+        HpSystem = new HealthSystem(50);
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        agent.SetDestination(player.transform.position);
-        
         if (HpSystem.GetHealth() == 0)
         {
             Destroy(gameObject);
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -38,4 +35,5 @@ public class EnemyScript : MonoBehaviour
             Debug.Log(playerRef.HpSystem.GetHealth());
         }
     }
+  
 }
