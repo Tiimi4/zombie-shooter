@@ -9,6 +9,8 @@ namespace StarterAssets
 	public class FirstPersonController : MonoBehaviour
 	{
 		[Header("Player")]
+		[Tooltip("Max health of player")]
+		public int MaxHealth = 100;
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
@@ -72,6 +74,7 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.001f;
+		public HealthSystem HpSystem;
 		
 
 		private void Awake()
@@ -117,6 +120,7 @@ namespace StarterAssets
 		}
 		private void Start()
 		{
+			HpSystem = new HealthSystem(MaxHealth);
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			
@@ -125,6 +129,8 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 			
 			AddWeaponCallbacks();
+			
+	
 		}
 
 		private void Update()
