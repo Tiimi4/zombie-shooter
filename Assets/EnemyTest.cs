@@ -24,7 +24,6 @@ public class EnemyTest : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -36,4 +35,5 @@ public class EnemyTest : MonoBehaviour
             Debug.Log(playerRef.HpSystem.GetHealth());
         }
     }
+  
 }

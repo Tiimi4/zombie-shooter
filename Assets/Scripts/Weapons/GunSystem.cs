@@ -111,8 +111,12 @@ namespace Weapons
                  if (firstHit.collider.CompareTag("Enemy"))
                  {
                      Debug.Log("Damage enemy here");
-                     EnemyTest enemyRef = firstHit.collider.gameObject.GetComponent<EnemyTest>();
-                     enemyRef.HpSystem.Damage(Damage);
+                     EnemyScript enemyRef = firstHit.collider.gameObject.GetComponent<EnemyScript>();
+                     if (enemyRef)
+                     {
+                         enemyRef.HpSystem.Damage(Damage);
+                     }
+                     
                  }
              }
 
