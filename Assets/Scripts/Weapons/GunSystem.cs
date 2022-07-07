@@ -30,6 +30,7 @@ namespace Weapons
         
 
         public GameObject sandHitPrefab;
+        public GameObject enemyHitPrefab;
         public GameObject muzzleFlashPrefab;
         
     
@@ -41,7 +42,7 @@ namespace Weapons
         public Transform muzzlePosition;
         private AudioSource shotSound;
         public Recoil recoilScript;
-        public Crosshair crosshair;
+        private Crosshair _crosshair;
         
         private void Awake()
         {
@@ -54,6 +55,11 @@ namespace Weapons
             shotSound = GetComponent<AudioSource>();
 
 
+        }
+
+        public void Start()
+        {
+            _crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
         }
 
         public void Update()
@@ -106,8 +112,7 @@ namespace Weapons
              {
                  // render hit effect
                  var firstHit = _rayHits.Take(hitCount).OrderBy(hit => hit.distance).First();
-                 Instantiate(sandHitPrefab, firstHit.point,
-                     Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
+                
                  if (firstHit.collider.CompareTag("Enemy"))
                  {
                      Debug.Log("Damage enemy here");
@@ -115,8 +120,16 @@ namespace Weapons
                      if (enemyRef)
                      {
                          enemyRef.HpSystem.Damage(Damage);
+                         Instantiate(enemyHitPrefab, firstHit.point,
+                             Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
                      }
                      
+                 }
+                 else
+                 {
+                     Debug.Log("Hit smth");
+                     Instantiate(sandHitPrefab, firstHit.point,
+                         Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
                  }
              }
 
@@ -124,7 +137,8 @@ namespace Weapons
 
             // Recoil
              recoilScript.RecoilFire();
-             crosshair.bulletWasShot = true;
+             
+             _crosshair.bulletWasShot = true;
             // Muzzle effect
             Instantiate(muzzleFlashPrefab, muzzlePosition);
              
