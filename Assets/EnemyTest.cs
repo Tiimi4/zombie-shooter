@@ -35,5 +35,7 @@ public class EnemyTest : MonoBehaviour
             Debug.Log(playerRef.HpSystem.GetHealth());
         }
     }
+    
+
   
 }
