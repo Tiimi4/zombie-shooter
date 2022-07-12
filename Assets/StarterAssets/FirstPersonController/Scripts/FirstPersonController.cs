@@ -89,7 +89,21 @@ namespace StarterAssets
 
 		}
 
+		private void Start()
+		{
+			HpSystem = new HealthSystem(MaxHealth);
+			HpSystem.OnDeath += Die;
+			_controller = GetComponent<CharacterController>();
+			_input = GetComponent<StarterAssetsInputs>();
+			
+			// reset our timeouts on start
+			_jumpTimeoutDelta = JumpTimeout;
+			_fallTimeoutDelta = FallTimeout;
+			
+			AddWeaponCallbacks();
+			
 	
+		}
 
 		private void AddWeaponCallbacks()
 		{
@@ -111,6 +125,11 @@ namespace StarterAssets
 			Debug.Log("rload anim pls");
 		}
 
+		private void Die()
+		{
+			Debug.Log("Player is dead");
+		}
+
 		private IEnumerator HandleReloadCoroutine()
 		{
 			_currentGun.StartReload();
@@ -118,20 +137,7 @@ namespace StarterAssets
 			_currentGun.FillAndCockWeapon();
 			ReloadCoroutine = null;
 		}
-		private void Start()
-		{
-			HpSystem = new HealthSystem(MaxHealth);
-			_controller = GetComponent<CharacterController>();
-			_input = GetComponent<StarterAssetsInputs>();
-			
-			// reset our timeouts on start
-			_jumpTimeoutDelta = JumpTimeout;
-			_fallTimeoutDelta = FallTimeout;
-			
-			AddWeaponCallbacks();
-			
 	
-		}
 
 		private void Update()
 		{
@@ -142,6 +148,8 @@ namespace StarterAssets
 			ManualReload();
 			SelectWeapon();
 			_currentGun.recoilScript.ApplyRotationToTransform();
+			
+			
 		}
 
 		private void SelectWeapon()

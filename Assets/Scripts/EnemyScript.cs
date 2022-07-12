@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         HpSystem = new HealthSystem(100);
+        HpSystem.OnDeath += Respawn;
         _player = GameObject.Find("PlayerCapsule");
        
         gameObject.transform.position = spawnPoint.position;
@@ -32,15 +33,6 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         agent.SetDestination(_player.transform.position);
-    
-        
-        if (HpSystem.GetHealth() == 0)
-        {
-            // move obj and heal, change into death later on
-            Respawn();
-
-        }
-
         timeSinceLastAttack += Time.deltaTime;
     }
    
