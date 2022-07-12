@@ -11,6 +11,9 @@ public class EnemyScript : MonoBehaviour
     NavMeshAgent agent;
     public HealthSystem HpSystem;
     public Transform spawnPoint;
+    public float attackTimeout;
+
+    private float timeSinceLastAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,18 +40,23 @@ public class EnemyScript : MonoBehaviour
             Respawn();
 
         }
+
+        timeSinceLastAttack += Time.deltaTime;
     }
-    private void OnTriggerEnter(Collider other)
+   
+    private void OnTriggerStay(Collider other)
     {
+        if (timeSinceLastAttack < attackTimeout) return;
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Playr damage trigger");
             
             FirstPersonController playerRef = other.GetComponent<FirstPersonController>();
             playerRef.HpSystem.Damage(20);
             Debug.Log(playerRef.HpSystem.GetHealth());
+            timeSinceLastAttack = 0f;
         }
     }
+
     private void Respawn()
     {
         agent.transform.position = spawnPoint.position;

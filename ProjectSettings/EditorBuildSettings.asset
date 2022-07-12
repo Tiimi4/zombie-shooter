@@ -8,11 +8,14 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Playground.unity
     guid: daa334b1589896f4382e89780c94e607
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/gunSystemPlayground.unity
     guid: c9bfcf55a22522140b37c71706867f53
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AssaultRiflePlayground.unity
     guid: ef2914c869c82b1438ef9c2bd6c3fa28
+  - enabled: 1
+    path: Assets/Scenes/CombineFeaturesScene.unity
+    guid: 62648d7d7b60cb9409e770c6be9867e6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

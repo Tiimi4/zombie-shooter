@@ -115,7 +115,7 @@ namespace Weapons
                 
                  if (firstHit.collider.CompareTag("Enemy"))
                  {
-                     Debug.Log("Damage enemy here");
+                     
                      EnemyScript enemyRef = firstHit.collider.gameObject.GetComponent<EnemyScript>();
                      if (enemyRef)
                      {
@@ -127,7 +127,7 @@ namespace Weapons
                  }
                  else
                  {
-                     Debug.Log("Hit smth");
+                     
                      Instantiate(sandHitPrefab, firstHit.point,
                          Quaternion.FromToRotation(Vector3.forward, firstHit.normal));
                  }
