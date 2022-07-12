@@ -10,16 +10,20 @@ public class EnemyScript : MonoBehaviour
     private GameObject _player;
     NavMeshAgent agent;
     public HealthSystem HpSystem;
-    public Transform spawnPoint;
+   
+    public float attackTimeout;
+
+    private float timeSinceLastAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         HpSystem = new HealthSystem(100);
+        HpSystem.OnDeath += Die;
         _player = GameObject.Find("PlayerCapsule");
        
-        gameObject.transform.position = spawnPoint.position;
+        
 
     }
 
@@ -29,33 +33,27 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         agent.SetDestination(_player.transform.position);
-    
-        
-        if (HpSystem.GetHealth() == 0)
-        {
-            // move obj and heal, change into death later on
-            Respawn();
-
-        }
+        timeSinceLastAttack += Time.deltaTime;
     }
-    private void OnTriggerEnter(Collider other)
+   
+    private void OnTriggerStay(Collider other)
     {
+        if (timeSinceLastAttack < attackTimeout) return;
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Playr damage trigger");
             
             FirstPersonController playerRef = other.GetComponent<FirstPersonController>();
             playerRef.HpSystem.Damage(20);
             Debug.Log(playerRef.HpSystem.GetHealth());
+            timeSinceLastAttack = 0f;
         }
     }
-    private void Respawn()
+
+
+
+    private void Die()
     {
-        agent.transform.position = spawnPoint.position;
-        gameObject.transform.position = spawnPoint.position;
-        Instantiate(gameObject);
         Destroy(gameObject);
-       
     }
 
 }

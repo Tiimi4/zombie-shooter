@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Weapons;
 
 namespace StarterAssets
@@ -89,7 +90,21 @@ namespace StarterAssets
 
 		}
 
-	
+		private void Start()
+		{
+			HpSystem = new HealthSystem(MaxHealth);
+			HpSystem.OnDeath += Die;
+			_controller = GetComponent<CharacterController>();
+			_input = GetComponent<StarterAssetsInputs>();
+			
+			// reset our timeouts on start
+			_jumpTimeoutDelta = JumpTimeout;
+			_fallTimeoutDelta = FallTimeout;
+			
+			AddWeaponCallbacks();
+			Cursor.lockState = CursorLockMode.Locked;
+
+		}
 
 		private void AddWeaponCallbacks()
 		{
@@ -111,6 +126,11 @@ namespace StarterAssets
 			Debug.Log("rload anim pls");
 		}
 
+		private void Die()
+		{
+			SceneManager.LoadScene("GameOver");
+		}
+
 		private IEnumerator HandleReloadCoroutine()
 		{
 			_currentGun.StartReload();
@@ -118,20 +138,7 @@ namespace StarterAssets
 			_currentGun.FillAndCockWeapon();
 			ReloadCoroutine = null;
 		}
-		private void Start()
-		{
-			HpSystem = new HealthSystem(MaxHealth);
-			_controller = GetComponent<CharacterController>();
-			_input = GetComponent<StarterAssetsInputs>();
-			
-			// reset our timeouts on start
-			_jumpTimeoutDelta = JumpTimeout;
-			_fallTimeoutDelta = FallTimeout;
-			
-			AddWeaponCallbacks();
-			
 	
-		}
 
 		private void Update()
 		{
@@ -142,6 +149,8 @@ namespace StarterAssets
 			ManualReload();
 			SelectWeapon();
 			_currentGun.recoilScript.ApplyRotationToTransform();
+			
+			
 		}
 
 		private void SelectWeapon()
