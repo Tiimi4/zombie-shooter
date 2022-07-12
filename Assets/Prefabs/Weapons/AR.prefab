@@ -261,13 +261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c965f4c9a4e9d419ba0cb18ecc602d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 25
   <MagazineBulletsLeft>k__BackingField: 0
-  <MaxBullets>k__BackingField: 300
+  <MaxBullets>k__BackingField: 30
   <Range>k__BackingField: 1000
   <isFullAuto>k__BackingField: 1
   <Rpm>k__BackingField: 600
   sandHitPrefab: {fileID: 3110127215233957925, guid: 0d8af29aefc44614eaa1e149a49f7c55, type: 3}
+  enemyHitPrefab: {fileID: 0}
   muzzleFlashPrefab: {fileID: 4755965974992714760, guid: e132f9ef6cd58c347920c0f23e182c08, type: 3}
   fpsCam: {fileID: 0}
   whatIsEnemy:
