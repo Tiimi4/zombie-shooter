@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
     private GameObject _player;
     NavMeshAgent agent;
     public HealthSystem HpSystem;
-    public Transform spawnPoint;
+   
     public float attackTimeout;
 
     private float timeSinceLastAttack = 0f;
@@ -20,10 +20,10 @@ public class EnemyScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         HpSystem = new HealthSystem(100);
-        HpSystem.OnDeath += Respawn;
+        HpSystem.OnDeath += Die;
         _player = GameObject.Find("PlayerCapsule");
        
-        gameObject.transform.position = spawnPoint.position;
+        
 
     }
 
@@ -49,13 +49,11 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void Respawn()
+
+
+    private void Die()
     {
-        agent.transform.position = spawnPoint.position;
-        gameObject.transform.position = spawnPoint.position;
-        Instantiate(gameObject);
         Destroy(gameObject);
-       
     }
 
 }
