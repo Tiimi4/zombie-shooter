@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Weapons;
 
 namespace StarterAssets
@@ -101,8 +102,8 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 			
 			AddWeaponCallbacks();
-			
-	
+			Cursor.lockState = CursorLockMode.Locked;
+
 		}
 
 		private void AddWeaponCallbacks()
@@ -127,7 +128,7 @@ namespace StarterAssets
 
 		private void Die()
 		{
-			Debug.Log("Player is dead");
+			SceneManager.LoadScene("GameOver");
 		}
 
 		private IEnumerator HandleReloadCoroutine()
