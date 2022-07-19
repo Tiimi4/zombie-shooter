@@ -67,10 +67,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.05
-  m_Height: 2
+  m_Radius: 1.17
+  m_Height: 4.68
   m_Direction: 1
-  m_Center: {x: 0.03, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.48, z: 0}
 --- !u!195 &6437309792039531750
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3900731c7764c243ae575b7ffb22c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
+  attackTimeout: 0
 --- !u!136 &1443098525
 CapsuleCollider:
   m_ObjectHideFlags: 0
