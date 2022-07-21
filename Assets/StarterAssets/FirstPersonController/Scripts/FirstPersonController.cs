@@ -121,9 +121,6 @@ namespace StarterAssets
 				ReloadCoroutine = StartCoroutine(nameof(HandleReloadCoroutine));
 			}
 			
-			
-			
-			Debug.Log("rload anim pls");
 		}
 
 		private void Die()
@@ -134,7 +131,7 @@ namespace StarterAssets
 		private IEnumerator HandleReloadCoroutine()
 		{
 			_currentGun.StartReload();
-			yield return new WaitForSeconds(2f);
+			yield return new WaitForSeconds(_currentGun.reloadTime);
 			_currentGun.FillAndCockWeapon();
 			ReloadCoroutine = null;
 		}

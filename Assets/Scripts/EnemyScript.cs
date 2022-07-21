@@ -15,25 +15,29 @@ public class EnemyScript : MonoBehaviour
 
     private float timeSinceLastAttack = 0f;
 
+    private float timeAlive = 0f;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = 1f;
+        
         HpSystem = new HealthSystem(100);
         HpSystem.OnDeath += Die;
         _player = GameObject.Find("PlayerCapsule");
-       
-        
-
     }
-
-   
-
+    
     // Update is called once per frame
     void Update()
     {
         agent.SetDestination(_player.transform.position);
         timeSinceLastAttack += Time.deltaTime;
+        timeAlive += Time.deltaTime;
+
+        agent.speed += (Time.deltaTime * 0.5f);
+        
     }
    
     private void OnTriggerStay(Collider other)
@@ -41,7 +45,6 @@ public class EnemyScript : MonoBehaviour
         if (timeSinceLastAttack < attackTimeout) return;
         if (other.CompareTag("Player"))
         {
-            
             FirstPersonController playerRef = other.GetComponent<FirstPersonController>();
             playerRef.HpSystem.Damage(20);
             Debug.Log(playerRef.HpSystem.GetHealth());

@@ -11,6 +11,8 @@ namespace Weapons
 
         // Gun stats
         [field: SerializeField] private int Damage { get; set; }
+        [field: SerializeField] public float reloadTime { get; set; }
+
         [field: SerializeField] private int MagazineBulletsLeft { get; set; }
         [field: SerializeField] private int MaxBullets { get; set; }
         [field: SerializeField] private float Range { get; set; }
