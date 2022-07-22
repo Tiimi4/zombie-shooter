@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public float minSpawnInterval;
 
     private int _minSpawnAmount = 1;
-    private int _maxSpawnAmount = 2;
+    private int _maxSpawnAmount = 3;
     private int _spawnAmount = 1;
 
     public GameObject enemyPrefab;
@@ -42,15 +42,12 @@ public class GameManager : MonoBehaviour
     private void IncreaseDifficultyOverTime()
     {
         _timeSincePreviousDifficultyIncrease = 0f;
-        Debug.Log("Game was made harder");
         
-        _maxSpawnAmount += 1;
+        //_maxSpawnAmount += 1;
         if (enemySpawnInterval > minSpawnInterval)
         { 
             enemySpawnInterval *= 0.9f;
         }
-       
-
 
 
     }
