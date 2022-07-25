@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -17,12 +19,17 @@ public class EnemyScript : MonoBehaviour
 
     private float timeAlive = 0f;
 
+    private GameManager _gameManager;
+   
     
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 1f;
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         
         HpSystem = new HealthSystem(100);
         HpSystem.OnDeath += Die;
@@ -56,6 +63,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Die()
     {
+        _gameManager.AddEnemyKilled();
         Destroy(gameObject);
     }
 

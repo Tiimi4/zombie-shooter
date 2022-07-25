@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Weapons;
@@ -76,6 +77,8 @@ namespace StarterAssets
 
 		private const float _threshold = 0.001f;
 		public HealthSystem HpSystem;
+
+		private TextMeshProUGUI _hpText;
 		
 
 		private void Awake()
@@ -94,6 +97,9 @@ namespace StarterAssets
 		{
 			HpSystem = new HealthSystem(MaxHealth);
 			HpSystem.OnDeath += Die;
+			HpSystem.OnDamaged += UpdateHpText;
+			_hpText = GameObject.Find("healthText").GetComponent<TextMeshProUGUI>();
+			UpdateHpText();
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			
@@ -112,6 +118,11 @@ namespace StarterAssets
 			_currentGun.OnEmptyClick += StartReloadAnimation;
 			_currentGun.recoilScript.RecoilTransform = RecoilTransform;
 
+		}
+
+		private void UpdateHpText()
+		{
+			_hpText.text = "HP: " + HpSystem.GetHealth();
 		}
 
 		private void StartReloadAnimation()

@@ -7,6 +7,7 @@ public class HealthSystem
    private int _health;
    private readonly int _maxHealth;
    public Action OnDeath;
+   public Action OnDamaged;
    public HealthSystem(int maxHealth)
    {
       this._maxHealth = maxHealth;
@@ -23,6 +24,7 @@ public class HealthSystem
    public void Damage(int damageAmount)
    {
       _health -= damageAmount;
+      OnDamaged?.Invoke();
       if (_health < 0) _health = 0;
       if(_health == 0) Death();
    }
