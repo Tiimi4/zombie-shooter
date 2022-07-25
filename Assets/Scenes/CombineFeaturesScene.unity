@@ -2024,7 +2024,7 @@ GameObject:
   - component: {fileID: 1389882951}
   - component: {fileID: 1389882950}
   m_Layer: 5
-  m_Name: ammo
+  m_Name: ammoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

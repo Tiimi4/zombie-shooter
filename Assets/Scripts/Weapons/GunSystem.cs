@@ -4,6 +4,8 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+
 namespace Weapons
 {
     public class GunSystem : MonoBehaviour
@@ -45,14 +47,15 @@ namespace Weapons
         private AudioSource shotSound;
         public Recoil recoilScript;
         private Crosshair _crosshair;
-        
+
+        private TextMeshProUGUI _ammoText;
         private void Awake()
         {
             fpsCam = Camera.main;
             if (fpsCam != null) _cameraTransform = fpsCam.transform;
-
+            
             MagazineBulletsLeft = MaxBullets;
-            CockWeapon();
+            
             recoilScript = GetComponent<Recoil>();
             shotSound = GetComponent<AudioSource>();
 
@@ -62,6 +65,14 @@ namespace Weapons
         public void Start()
         {
             _crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair>();
+           InitAmmoTextRef();
+           CockWeapon();
+
+        }
+
+        public void InitAmmoTextRef()
+        {
+            _ammoText = GameObject.Find("ammoText").GetComponent<TextMeshProUGUI>();
         }
 
         public void Update()
@@ -80,6 +91,23 @@ namespace Weapons
 
         }
 
+        public void UpdateAmmoText()
+        {
+            if (MagazineBulletsLeft > 0)
+            {
+                _ammoText.text = MagazineBulletsLeft + 1 + " / " + MaxBullets;
+                return;
+            }
+            if (_isChambered)
+            {
+                _ammoText.text = 1 + " / " + MaxBullets;
+                return;
+            }
+            _ammoText.text = 0 + " / " + MaxBullets;
+            
+           
+        }
+
         public void PullTrigger(bool isHeld)
         {
             _isTriggerHeld = isHeld;
@@ -95,6 +123,7 @@ namespace Weapons
         public void StartReload()
         {
             _isReloading = true;
+            _ammoText.text = "Reloading...";
         }
 
         private void Fire()
@@ -106,6 +135,7 @@ namespace Weapons
                 EmptyClick();
                 return;
             }
+            
             
           
 
@@ -168,11 +198,13 @@ namespace Weapons
         {
             _isCocked = true;
 
+      
             if (HasAmmoLeft)
             {
                 _isChambered = true;
                 MagazineBulletsLeft--;
             }
+            UpdateAmmoText();
             
         }
 

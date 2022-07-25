@@ -172,6 +172,9 @@ namespace StarterAssets
 				_currentGunIndex = index;
 				_currentGun = Guns[index - 1];
 				AddWeaponCallbacks();
+				_currentGun.InitAmmoTextRef();
+				_currentGun.UpdateAmmoText();
+
 			}
 			
 		}
