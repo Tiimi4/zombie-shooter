@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float minSpawnInterval;
 
     private int _minSpawnAmount = 1;
-    private int _maxSpawnAmount = 3;
+    private int _maxSpawnAmount = 1;
     private int _spawnAmount = 1;
 
     public GameObject enemyPrefab;
@@ -85,6 +85,11 @@ public class GameManager : MonoBehaviour
         _enemiesKilled += 1;
         _enemiesKilledText.text = "Enemies killed " + _enemiesKilled;
         
+    }
+
+    public float GetTimeSurvived()
+    {
+        return _timeSurvived;
     }
 }
 

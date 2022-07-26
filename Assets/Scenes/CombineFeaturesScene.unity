@@ -449,8 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficultyIncreaseInterval: 10
-  enemySpawnInterval: 5
-  minSpawnInterval: 2
+  enemySpawnInterval: 4
+  minSpawnInterval: 1
   enemyPrefab: {fileID: 4652192104985506476, guid: 3ee25ae31d7529349b31f3c0c19b19c6, type: 3}
   spawnPoints:
   - {fileID: 802070623}
