@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using StarterAssets;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+
 
 public class EnemyScript : MonoBehaviour
 {
@@ -17,19 +14,17 @@ public class EnemyScript : MonoBehaviour
 
     private float timeSinceLastAttack = 0f;
 
-    private float timeAlive = 0f;
 
     private GameManager _gameManager;
-   
+    
+    private float _accelerationMultiplier = 0.5f;
     
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = 1f;
-
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        _accelerationMultiplier += _gameManager.GetTimeSurvived() * 0.01f;
         
         HpSystem = new HealthSystem(100);
         HpSystem.OnDeath += Die;
@@ -41,9 +36,7 @@ public class EnemyScript : MonoBehaviour
     {
         agent.SetDestination(_player.transform.position);
         timeSinceLastAttack += Time.deltaTime;
-        timeAlive += Time.deltaTime;
-
-        agent.speed += (Time.deltaTime * 0.5f);
+        agent.speed += (Time.deltaTime * _accelerationMultiplier);
         
     }
    
@@ -54,7 +47,7 @@ public class EnemyScript : MonoBehaviour
         {
             FirstPersonController playerRef = other.GetComponent<FirstPersonController>();
             playerRef.HpSystem.Damage(20);
-            Debug.Log(playerRef.HpSystem.GetHealth());
+            //Debug.Log(playerRef.HpSystem.GetHealth());
             timeSinceLastAttack = 0f;
         }
     }
