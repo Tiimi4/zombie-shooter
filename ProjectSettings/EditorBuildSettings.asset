@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/AssaultRiflePlayground.unity
     guid: ef2914c869c82b1438ef9c2bd6c3fa28
   - enabled: 1
+    path: Assets/Scenes/StartScreen.unity
+    guid: 089eb6eaaa4422b46acb443dc5c1e25b
+  - enabled: 1
     path: Assets/Scenes/CombineFeaturesScene.unity
     guid: 62648d7d7b60cb9409e770c6be9867e6
   - enabled: 1
